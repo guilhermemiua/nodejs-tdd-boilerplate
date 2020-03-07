@@ -1,3 +1,6 @@
-const routes = require('express').Router()
+const routes = require('express').Router();
+const AuthController = require('../app/controllers/AuthController');
 
-module.exports = routes
+routes.post('/authenticate', AuthController.store);
+
+module.exports = routes;
