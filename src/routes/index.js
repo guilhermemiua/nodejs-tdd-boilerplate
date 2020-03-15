@@ -1,9 +1,10 @@
 const routes = require('express').Router();
 
-const AuthController = require('../app/controllers/AuthController');
+const UserController = require('../app/controllers/UserController');
 const authMiddleware = require('../app/middlewares/auth');
 
-routes.post('/authenticate', AuthController.authenticate);
+routes.post('/register', UserController.register);
+routes.post('/authenticate', UserController.authenticate);
 
 // Authenticated routes
 routes.use(authMiddleware);

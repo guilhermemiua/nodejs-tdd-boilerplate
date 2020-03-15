@@ -1,6 +1,29 @@
 const { User } = require('../models');
 
-class AuthController {
+class UserController {
+  async register(req, res) {
+    try {
+      const { email, password } = req.body;
+
+      if (!email) {
+        return res.status(401).json({ message: 'E-mail not provided' });
+      }
+
+      if (!password) {
+        return res.status(401).json({ message: 'Password not provided' });
+      }
+
+      const user = await User.create({
+        email,
+        password,
+      });
+
+      return res.status(201).json({ user });
+    } catch (error) {
+      return res.status(401).json({ message: error });
+    }
+  }
+
   async authenticate(req, res) {
     try {
       const { email, password } = req.body;
@@ -24,4 +47,4 @@ class AuthController {
   }
 }
 
-module.exports = new AuthController();
+module.exports = new UserController();
